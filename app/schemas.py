@@ -27,3 +27,15 @@ class Note(NoteBase):
     id: int
 
     model_config = ConfigDict(from_attributes=True)
+
+
+class AIGenerateActionItemsRequest(BaseModel):
+    description: str
+
+
+class AIGenerateActionItemsResponse(BaseModel):
+    action_items: List[str]
+
+
+class AINoteCreateRequest(BaseModel):
+    description: str
