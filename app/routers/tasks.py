@@ -8,7 +8,7 @@ router = APIRouter()
 
 @router.post("/", response_model=schemas.Task)
 def create_task(task: schemas.TaskCreate, db: Session = Depends(database.get_db)):
-    db_task = models.Task(**task.dict())
+    db_task = models.Task(**task.model_dump())
     db.add(db_task)
     db.commit()
     db.refresh(db_task)

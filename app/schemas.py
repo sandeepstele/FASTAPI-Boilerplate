@@ -1,6 +1,6 @@
 from typing import List, Dict, Any, Optional
 from datetime import datetime
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict, Field
 
 
 class TaskBase(BaseModel):
@@ -15,9 +15,9 @@ class TaskCreate(TaskBase):
 
 class Task(TaskBase):
     id: int
-
-    class Config:
-        orm_mode = True
+    
+    # Pydantic v2: enable ORM mode
+    model_config = ConfigDict(from_attributes=True)
 
 
 class ProductBase(BaseModel):
@@ -30,13 +30,13 @@ class ProductBase(BaseModel):
     short_description: Optional[str] = None
     sku: str
     brand_id: Optional[str] = None
-    category_ids: List[str] = []
-    tags: List[str] = []
+    category_ids: List[str] = Field(default_factory=list)
+    tags: List[str] = Field(default_factory=list)
     price: float
     compare_at_price: Optional[float] = None
     cost_price: Optional[float] = None
     weight: Optional[float] = None
-    dimensions: Dict[str, float] = {}
+    dimensions: Dict[str, float] = Field(default_factory=dict)
     inventory_quantity: int
     inventory_status: str
     low_stock_threshold: Optional[int] = None
@@ -47,10 +47,10 @@ class ProductBase(BaseModel):
     sort_order: Optional[int] = None
     meta_title: Optional[str] = None
     meta_description: Optional[str] = None
-    attributes: List[Dict[str, str]] = []
-    variants: List[Dict[str, Any]] = []
-    images: List[Dict[str, Any]] = []
-    additional_data: Dict[str, Any] = {}
+    attributes: List[Dict[str, str]] = Field(default_factory=list)
+    variants: List[Dict[str, Any]] = Field(default_factory=list)
+    images: List[Dict[str, Any]] = Field(default_factory=list)
+    additional_data: Dict[str, Any] = Field(default_factory=dict)
 
 
 class ProductCreate(ProductBase):
@@ -58,5 +58,5 @@ class ProductCreate(ProductBase):
 
 
 class Product(ProductBase):
-    class Config:
-        orm_mode = True
+    # Pydantic v2: enable ORM mode
+    model_config = ConfigDict(from_attributes=True)
