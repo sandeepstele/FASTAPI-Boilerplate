@@ -1,6 +1,6 @@
 # FastAPI Boilerplate
 
-This project provides a simple FastAPI server with example endpoints for task management and a product catalog. It uses SQLite via SQLAlchemy and includes unit tests.
+This project provides a simple FastAPI server with a build notes API demonstrating full CRUD functionality. It uses SQLite via SQLAlchemy and includes unit tests.
 
 ## Setup
 
